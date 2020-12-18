@@ -31,6 +31,11 @@ class ArbTest : StringSpec() {
             assertEquals(listOf(0, -1, -2, -3, -4), negativeOr0IntArb.samplesList(testRandomSource(), 5))
         }
 
+        "flatMap"{
+            val flatMapped: Arb<Int> = positiveIntArb.flatMap { i -> constArb(i) }
+            assertEquals(listOf(0, 1, 2, 3, 4), flatMapped.samplesList(testRandomSource(), 5))
+        }
+
         "charArb"{
             assertEquals(listOf('a', 'b', 'c', 'd', 'e'), charArb().samplesList(testRandomSource(), 5))
         }
